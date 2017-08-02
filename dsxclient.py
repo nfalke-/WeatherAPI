@@ -38,3 +38,16 @@ class DsxClient(BaseClient):
         except:
             print(response.text)
             raise
+
+    def get_astro(self, datetime, numdays, loc_key):
+        path = ['wxd/v2/Astro', 'en-US', datetime, numdays, loc_key]
+        params = {
+            'api': self.api_key,
+            'format': 'json'
+        }
+        response = self._get(path=path, params=params)
+        try:
+            return response.json()['AstroData']
+        except:
+            print(response.text)
+            raise
